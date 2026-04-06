@@ -54,7 +54,7 @@
             bindings = <
 &trans     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3     &kp NUMBER_4     &kp NUMBER_5    &kp NUMBER_6       &kp NUMBER_7  &kp NUMBER_8   &kp NUMBER_9    &kp NUMBER_0    &trans
 &kp TAB    &trans        &trans        &kp JP_LBRACKET  &kp JP_RBRACKET  &trans          &kp KP_PLUS        &kp NUMBER_4  &kp NUMBER_5   &kp NUMBER_6    &kp JP_COLON    &kp JP_UNDERSCORE
-&kp ENTER  &trans        &trans        &kp JP_LPAREN    &kp JP_RPAREN    &trans          &kp MINUS          &kp NUMBER_1  &kp NUMBER_2   &kp NUMBER_3    &kp UP_ARROW    &trans
+&kp LSHFT  &trans        &trans        &kp JP_LPAREN    &kp JP_RPAREN    &trans          &kp MINUS          &kp NUMBER_1  &kp NUMBER_2   &kp NUMBER_3    &kp UP_ARROW    &trans
 &trans     &trans        &trans        &trans           &trans           &trans          &kp RIGHT_CONTROL  &kp NUMBER_0  &kp JP_DQUOTE  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW
             >;
         };
