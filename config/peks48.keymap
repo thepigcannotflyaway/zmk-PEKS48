@@ -7,7 +7,6 @@
 #include <dt-bindings/zmk/pointing.h>
 
 // Conversion definition for using Japanese keyboard with OS settings
-
 #define JP_DQUOTE       AT                // "
 #define JP_AMPERSAND    CARET             // &
 #define JP_QUOTE        AMPERSAND         // '
@@ -22,8 +21,7 @@
 #define JP_ASTERISK     DOUBLE_QUOTES     // *
 #define JP_BACKQUOTE    LEFT_BRACE        // `
 #define JP_UNDERSCORE   LS(0x87)          // _
-#define JP_LBRACKET     RIGHT_BRACKET     // [
-#define JP_RBRACKET     BACKSLASH         // ]
+#define JP_LBRACKET     RIGHT_BRACKET     //
 #define JP_LPAREN       ASTERISK          // (
 #define JP_RPAREN       LEFT_PARENTHESIS  // )
 #define JP_LBRACE       RIGHT_BRACE       // {
@@ -38,69 +36,60 @@
 };
 
 / {
+    combos {
+        compatible = "zmk,combos";
+        
+        // 左下(36) + 右下(47) + 左上(0)の3点同時押しでBluetooth全リセット
+        combo_bt_clr {
+            timeout-ms = <50>;
+            key-positions = <36 47 0>;
+            bindings = <&bt BT_CLR_ALL>;
+        };
+        
+        // 左下(36) + 右下(47) + 左手人差し指上(5)の3点同時押しでシステムリセット
+        combo_sys_reset {
+            timeout-ms = <50>;
+            key-positions = <36 47 5>;
+            bindings = <&sys_reset>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-&kp ESCAPE        &kp Q         &kp W     &kp E     &kp R     &kp T          &kp Y        &kp U                &kp I         &kp O        &kp P          &kp DELETE
-&kp TAB           &kp A         &kp S     &kp D     &kp F     &kp G          &kp H        &kp J                &kp K         &kp L        &kp SEMICOLON  &kp BACKSPACE
-&kp LSHIFT        &kp Z         &kp X     &kp C     &kp V     &kp B          &kp N        &kp M                &kp COMMA     &kp DOT      &kp MINUS      &kp SLASH
-&kp LEFT_CONTROL  &kp LEFT_ALT  &kp LWIN  &kp INT4  &kp INT5  &lt 1 SPACE    &lt 2 ENTER  &lt 3 RIGHT_CONTROL  &kp JP_QUOTE  &kp PAGE_UP  &kp PAGE_DOWN  &kp RIGHT_SHIFT
+                &kp TAB       &kp Q    &kp W    &kp E     &kp R     &kp T          &kp Y     &kp U    &kp I     &kp O   &kp P    &kp BSPC
+                &mt LCTRL ESC &kp A    &kp S    &kp D     &kp F     &kp G          &kp H     &kp J    &kp K     &kp L   &kp SEMI &kp SQT
+                &kp LSHFT     &kp Z    &kp X    &kp C     &kp V     &kp B          &kp N     &kp M    &kp COMMA &kp DOT &kp FSLH &kp RSHFT
+                &kp LGUI      &kp LALT &trans   &mo 1     &kp SPACE &mo 3          &mo 2     &kp RET  &mo 1     &trans  &kp RALT &kp RCTRL
             >;
         };
 
-        layer_1 {
+        nav_layer {
             bindings = <
-&trans            &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3     &kp NUMBER_4     &kp NUMBER_5    &kp NUMBER_6       &kp NUMBER_7  &kp NUMBER_8   &kp NUMBER_9    &kp NUMBER_0    &trans
-&kp TAB           &trans        &trans        &kp JP_LBRACKET  &kp JP_RBRACKET  &trans          &kp KP_PLUS        &kp NUMBER_4  &kp NUMBER_5   &kp NUMBER_6    &kp JP_COLON    &kp JP_UNDERSCORE
-&kp LSHFT         &trans        &trans        &kp JP_LPAREN    &kp JP_RPAREN    &trans          &kp MINUS          &kp NUMBER_1  &kp NUMBER_2   &kp NUMBER_3    &kp UP_ARROW    &trans
-&kp LEFT_CONTROL  &trans        &trans        &trans           &trans           &trans          &kp RIGHT_CONTROL  &kp NUMBER_0  &kp JP_DQUOTE  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW
+                &kp ESC       &kp F1   &kp F2   &kp F3    &kp F4    &kp F5         &kp PG_UP &kp HOME &kp UP   &kp END   &kp C_VOL_UP &kp C_MUTE
+                &kp LGUI      &kp LALT &kp LCTRL &kp LSHFT &kp F6    &trans         &kp PG_DN &kp LEFT &kp DOWN &kp RIGHT &kp C_VOL_DN &trans
+                &trans        &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &trans         &trans    &trans   &trans   &trans    &trans       &trans
+                &trans        &trans   &trans   &trans    &trans    &trans         &trans    &trans   &trans   &trans    &trans       &trans
             >;
         };
 
-        layer_2 {
+        num_layer {
             bindings = <
-&trans        &kp F1        &kp F2        &kp F3        &kp F4          &kp F5         &kp F6  &kp F7          &kp F8          &kp F9           &kp F10  &kp F11
-&trans        &trans        &trans        &trans        &trans          &trans         &trans  &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT_ARROW  &trans   &kp F12
-&trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &bootloader    &trans  &trans          &kp DOWN_ARROW  &trans           &trans   &trans
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans         &trans  &trans          &trans          &trans           &trans   &kp LA(F4)
+                &kp F7        &kp F8   &kp F9   &kp F10   &kp F11   &kp F12        &kp EQUAL &kp N7   &kp N8   &kp N9    &kp DEL      &trans
+                &trans        &trans   &trans   &trans    &trans    &trans         &kp MINUS &kp N4   &kp N5   &kp N6    &kp PLUS     &trans
+                &trans        &trans   &trans   &trans    &trans    &trans         &kp STAR  &kp N1   &kp N2   &kp N3    &kp FSLH     &trans
+                &trans        &trans   &trans   &trans    &trans    &trans         &kp N0    &kp N0   &kp DOT  &kp RET   &trans       &trans
             >;
         };
 
-        layer_3 {
+        sym_layer {
             bindings = <
-&trans        &kp EXCLAMATION  &kp JP_AT       &kp POUND        &kp DOLLAR  &kp PERCENT     &kp JP_CARET  &kp JP_AMPERSAND   &kp JP_ASTERISK   &kp MINUS    &kp UNDERSCORE   &trans
-&trans        &kp GRAVE        &kp TILDE       &trans           &trans      &kp C_VOL_UP    &kp C_VOL_DN  &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE  &kp JP_PLUS  &kp JP_ASTERISK  &trans
-&msc SCRL_UP  &msc SCRL_DOWN   &msc SCRL_LEFT  &msc SCRL_RIGHT  &trans      &trans          &trans        &trans             &trans            &trans       &trans           &trans
-&trans        &trans           &trans          &trans           &trans      &trans          &trans        &trans             &trans            &trans       &trans           &trans
-            >;
-        };
-
-        layer_4 {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&trans  &trans  &trans  &trans  &trans  &trans    &trans       &tog 6        &trans        &trans        &trans        &bt BT_CLR
-&trans  &trans  &trans  &trans  &trans  &trans    &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR_ALL
-&trans  &trans  &trans  &trans
-            >;
-        };
-
-        layer_5 {
-            bindings = <
-&trans  &trans  &trans    &trans    &trans    &trans    &trans  &trans    &trans    &trans    &trans  &trans
-&trans  &trans  &mkp MB3  &mkp MB2  &mkp MB1  &trans    &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans  &trans
-&trans  &trans  &trans    &trans    &trans    &trans    &trans  &trans    &trans    &trans    &trans  &trans
-&trans  &trans  &trans    &trans
-            >;
-        };
-
-        layer_6 {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans
+                &kp EXCL      &kp AT   &kp HASH &kp DLLR  &kp PRCNT &kp CARET      &kp AMPS  &kp LBKT &kp RBKT &kp UNDER &kp BSLH     &bt BT_PRV
+                &kp GRAVE     &kp TILDE &trans  &trans    &trans    &trans         &trans    &kp LPAR &kp RPAR &kp MINUS &kp EQUAL    &bt BT_NXT
+                &trans        &trans   &trans   &trans    &trans    &trans         &trans    &kp LBRC &kp RBRC &trans    &trans       &kp LS(LG(S))
+                &trans        &trans   &trans   &trans    &trans    &trans         &trans    &trans   &trans   &trans    &trans       &trans
             >;
         };
     };
