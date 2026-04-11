@@ -3,17 +3,12 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-&mt {
-    flavor = "balanced";
-    quick-tap-ms = ;
-};
-
 / {
     behaviors {
         // Shift + Backspace で Delete になる設定
         bspc_del: backspace_delete {
             compatible = "zmk,behavior-mod-morph";
-            #binding-cells = ;
+            #binding-cells = <0>;
             bindings = <&kp BSPC>, <&kp DEL>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -23,13 +18,13 @@
         compatible = "zmk,combos";
 
         combo_bt_clr {
-            timeout-ms = ;
+            timeout-ms = <50>;
             key-positions = <36 47 0>;
             bindings = <&bt BT_CLR_ALL>;
         };
 
         combo_sys_reset {
-            timeout-ms = ;
+            timeout-ms = <50>;
             key-positions = <36 47 5>;
             bindings = <&sys_reset>;
         };
@@ -49,10 +44,10 @@
 
         nav_layer {
             bindings = <
-&trans  &kp N1     &kp N2          &kp N3          &kp N4           &kp N5       &kp N6     &kp N7  &kp N8    &kp N9           &kp N0  &trans
-&trans  &trans     &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans       &kp PG_UP  &none   &kp UP    &none            &none   &kp C_MUTE
+&trans  &kp N1     &kp N2          &kp N3          &kp N4           &kp N5       &kp N6     &kp N7   &kp N8   &kp N9           &kp N0  &trans
+&trans  &trans     &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans       &kp PG_UP  &none    &kp UP   &none            &none   &kp C_MUTE
 &trans  &kp LC(Z)  &kp LC(X)       &kp LC(C)       &kp LC(V)        &trans       &kp PG_DN  &kp LEFT &kp DOWN &kp RIGHT_ARROW  &none   &kp C_VOL_UP
-&trans  &trans     &trans          &trans          &trans           &trans       &trans     &trans  &trans    &trans           &trans  &kp C_VOL_DN
+&trans  &trans     &trans          &trans          &trans           &trans       &trans     &trans   &trans   &trans           &trans  &kp C_VOL_DN
             >;
         };
 
